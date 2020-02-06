@@ -8,15 +8,97 @@
 
 import UIKit
 import CoreData
+import CoreLocation
+import Combine
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
 
+    var locationManager = CLLocationManager()
+    var lastLocation: CLLocation?
+    var tvd: TrackingViewData?
+    var trackingStateCancellable : AnyCancellable?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        locationManager.desiredAccuracy = 10
+        locationManager.delegate = self
+        locationManager.activityType = CLActivityType.other
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.distanceFilter = kCLDistanceFilterNone
+        locationManager.requestAlwaysAuthorization()
+        
+        if TrackingState.getFromUserDefaults().shouldTrackLocations() {
+            locationManager.startUpdatingLocation()
+        }
+        
         return true
+    }
+    
+    func onTrackingStateChange(_ ts: TrackingState) {
+        if ts.shouldTrackLocations() {
+            print("startUpdatingLocation")
+            locationManager.startUpdatingLocation() // idempotent
+        }
+        else {
+            print("stopUpdatingLocation")
+            locationManager.stopUpdatingLocation()
+        }
+    }
+    
+    func hasGoodGPSFix() -> Bool {
+        if let loc = lastLocation {
+            let dateOk = abs(loc.timestamp.distance(to: Date())) < 10
+            let accuracyOk = loc.horizontalAccuracy <= 30
+            return dateOk && accuracyOk
+        }
+        return false
+    }
+    
+    func linkToTVD(_ trackingViewData: TrackingViewData) {
+        tvd = trackingViewData
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        lastLocation = locations.last
+        if let location = lastLocation {
+            print("Got location: ", location)
+            uploadLocation(location)
+        }
+        if let trackingViewData = tvd {
+            trackingViewData.haveGoodGPSFix = self.hasGoodGPSFix()
+            // TODO: figure out how to update this on a timer in case we stop getting locations
+        }
+    }
+    
+    func uploadLocation(_ location: CLLocation) {
+        let endpoint = "https://enh06upo7jwzf.x.pipedream.net"
+        guard let url = URL(string: endpoint) else {
+            print("Failed to make url: \(endpoint)")
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        let dateFormatter = ISO8601DateFormatter.init()
+        do {
+            let locationDict = [
+                "latitude": location.coordinate.latitude,
+                "longitude": location.coordinate.longitude,
+                "horizontalAccuracy": location.horizontalAccuracy,
+                "date": dateFormatter.string(from: location.timestamp),
+                ] as [String : Any]
+            let jsonStr = try JSONSerialization.data(withJSONObject: locationDict, options: [])
+            request.httpBody = jsonStr
+        }
+        catch {
+            print("Can't write JSON object for location")
+            return
+        }
+        let session = URLSession.shared
+        let task = session.dataTask(with: request, completionHandler: { _, _, _ in })
+        task.resume()
     }
 
     // MARK: UISceneSession Lifecycle

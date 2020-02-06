@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		205882E723EA1A15004273E5 /* TrackingViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205882E623EA1A15004273E5 /* TrackingViewData.swift */; };
 		20FDF89D23E3DAB80056F6C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF89C23E3DAB80056F6C5 /* AppDelegate.swift */; };
 		20FDF89F23E3DAB80056F6C5 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF89E23E3DAB80056F6C5 /* SceneDelegate.swift */; };
 		20FDF8A223E3DAB80056F6C5 /* Burro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF8A023E3DAB80056F6C5 /* Burro.xcdatamodeld */; };
@@ -16,6 +17,7 @@
 		20FDF8AC23E3DABC0056F6C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20FDF8AA23E3DABC0056F6C5 /* LaunchScreen.storyboard */; };
 		20FDF8B723E3DABC0056F6C5 /* BurroTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF8B623E3DABC0056F6C5 /* BurroTests.swift */; };
 		20FDF8C223E3DABC0056F6C5 /* BurroUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF8C123E3DABC0056F6C5 /* BurroUITests.swift */; };
+		20FDF8D023E5DE4B0056F6C5 /* TrackingStateEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20FDF8CF23E5DE4B0056F6C5 /* TrackingStateEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		205882E623EA1A15004273E5 /* TrackingViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingViewData.swift; sourceTree = "<group>"; };
 		20FDF89923E3DAB70056F6C5 /* Burro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Burro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		20FDF89C23E3DAB80056F6C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20FDF89E23E3DAB80056F6C5 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		20FDF8BD23E3DABC0056F6C5 /* BurroUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurroUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20FDF8C123E3DABC0056F6C5 /* BurroUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurroUITests.swift; sourceTree = "<group>"; };
 		20FDF8C323E3DABC0056F6C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20FDF8CF23E5DE4B0056F6C5 /* TrackingStateEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackingStateEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				20FDF8AD23E3DABC0056F6C5 /* Info.plist */,
 				20FDF8A023E3DAB80056F6C5 /* Burro.xcdatamodeld */,
 				20FDF8A723E3DABC0056F6C5 /* Preview Content */,
+				20FDF8CF23E5DE4B0056F6C5 /* TrackingStateEnum.swift */,
+				205882E623EA1A15004273E5 /* TrackingViewData.swift */,
 			);
 			path = Burro;
 			sourceTree = "<group>";
@@ -270,6 +276,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				20FDF8D023E5DE4B0056F6C5 /* TrackingStateEnum.swift in Sources */,
+				205882E723EA1A15004273E5 /* TrackingViewData.swift in Sources */,
 				20FDF8A223E3DAB80056F6C5 /* Burro.xcdatamodeld in Sources */,
 				20FDF89D23E3DAB80056F6C5 /* AppDelegate.swift in Sources */,
 				20FDF8A423E3DAB80056F6C5 /* ContentView.swift in Sources */,
@@ -440,6 +448,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Burro/Preview Content\"";
+				DEVELOPMENT_TEAM = 2D83QV3AFL;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Burro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,6 +468,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"Burro/Preview Content\"";
+				DEVELOPMENT_TEAM = 2D83QV3AFL;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Burro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
